@@ -1,0 +1,7 @@
+﻿# Optional: install for real LoRA fine-tuning
+# If these fail (Python 3.14 wheel issues), the project uses a mock trainer
+torch>=2.0.0
+transformers>=4.36.0
+peft>=0.7.0
+datasets>=2.16.0
+accelerate>=0.25.0
