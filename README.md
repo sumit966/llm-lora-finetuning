@@ -1,55 +1,233 @@
-# Domain-Specific LLM Fine-Tuning with LoRA
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 🧠 LoRA Fine-Tuning — 16D AI + Neural Network Animated README -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
-Fine-tune an open-source LLM on a domain-specific Q&A dataset using **LoRA (Low-Rank Adaptation)**, then compare the fine-tuned model against the base model on a fixed evaluation set. Includes a FastAPI service for training, evaluation, and inference.
+<!-- ═══════ 16D ANIMATED HEADER ═══════ -->
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:8b5cf6,50:3b82f6,75:ec4899,100:0d1117&height=240&section=header&text=🧠%20LoRA%20Fine-Tuning&fontSize=46&fontColor=ffffff&animation=scaleIn&fontAlignY=38&desc=Low-Rank%20Adaptation%20%7C%20Domain-Specific%20LLM%20Tuning&descAlignY=60&descSize=17" />
+</div>
 
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
-![PEFT](https://img.shields.io/badge/PEFT-LoRA-1C3C3C?style=for-the-badge)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+<!-- ═══════ NEURAL NETWORK PULSING NODES ═══════ -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/claude-mascot.svg" width="90" alt="Claude" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/gemini-levitating.svg" width="90" alt="Gemini" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/deepseek-mascot.svg" width="90" alt="DeepSeek" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/copilot-mascot.svg" width="90" alt="Copilot" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/cursor-mascot.svg" width="90" alt="Cursor" />
+</div>
 
-## Overview
+<br/>
 
-Instead of retraining an entire LLM (which is expensive and slow), this project uses **LoRA** to inject small trainable low-rank matrices into the base model's attention layers. The base model stays frozen, and only ~1% of parameters are trained — but the model learns domain-specific behaviors.
+<!-- ═══════ 16D AI TERMINAL TYPEWRITER ═══════ -->
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=800&size=22&duration=2600&pause=700&color=8B5CF6&center=true&vCenter=true&multiline=true&width=900&height=140&lines=🧠+LoRA+Fine-Tuning+Pipeline;⚡+Only+~1%25+Parameters+Trained;🎯+Domain-Specific+Adaptation;🚀+Base+Model+vs+Fine-Tuned;💾+Adapters+~10+MB+vs+~5+GB" alt="16D Terminal" />
+</div>
 
-The pipeline:
+<br/>
 
-1. Generates (or loads) a domain-specific instruction-tuning dataset
-2. Wraps the base model with LoRA adapters via HuggingFace PEFT
-3. Fine-tunes on the dataset
-4. Saves only the adapter weights (a few MB instead of GB)
-5. Evaluates fine-tuned vs base model on a fixed eval set
-6. Serves inference via a FastAPI endpoint
+<!-- ═══════ AI AGENT SCENES (8D Cinematic) ═══════ -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/scenes/claude-code-terminal-sprint.svg" width="190" alt="Terminal Sprint" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/scenes/claude-bug-hunting.svg" width="190" alt="Bug Hunting" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/scenes/claude-code-coffee-compile.svg" width="190" alt="Coffee Compile" />
+</div>
 
-If the heavy training stack (torch, transformers, peft) is unavailable, the project falls back to a mock trainer that keeps the interface intact — so tests always pass, even in CI without GPU.
+<br/>
 
-## Problem Statement
+<!-- ═══════ LIVE BADGES ═══════ -->
+<div align="center">
+  <a href="https://github.com/sumit966/llm-lora-finetuning/stargazers">
+    <img src="https://img.shields.io/github/stars/sumit966/llm-lora-finetuning?style=for-the-badge&color=8b5cf6&labelColor=0d1117&logo=github&logoColor=white" />
+  </a>
+  <a href="https://github.com/sumit966/llm-lora-finetuning/network/members">
+    <img src="https://img.shields.io/github/forks/sumit966/llm-lora-finetuning?style=for-the-badge&color=3b82f6&labelColor=0d1117&logo=git&logoColor=white" />
+  </a>
+  <a href="https://github.com/sumit966/llm-lora-finetuning/issues">
+    <img src="https://img.shields.io/github/issues/sumit966/llm-lora-finetuning?style=for-the-badge&color=ec4899&labelColor=0d1117&logo=github&logoColor=white" />
+  </a>
+  <a href="https://github.com/sumit966/llm-lora-finetuning/commits/main">
+    <img src="https://img.shields.io/github/last-commit/sumit966/llm-lora-finetuning?style=for-the-badge&color=f59e0b&labelColor=0d1117&logo=git&logoColor=white" />
+  </a>
+</div>
 
-General-purpose LLMs fail on domain-specific tasks:
+<br/>
 
-- **Wrong terminology** — they mix up jargon from different domains
-- **Verbose answers** — instead of concise, on-point responses
-- **Hallucinated facts** — they invent plausible-sounding but false details
-- **No format control** — outputs don't follow your required structure
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
+  <img src="https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" />
+  <img src="https://img.shields.io/badge/PEFT-LoRA-1C3C3C?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</div>
 
-Full fine-tuning solves this but costs:
+<br/>
 
-- $$$ (multiple GPUs for days)
-- Storage (each fine-tuned model = 10+ GB)
-- Risk of catastrophic forgetting
+<div align="center">
+  <img src="https://img.shields.io/badge/Params_Trained-~1%25-8b5cf6?style=for-the-badge&logo=brain&logoColor=white" />
+  <img src="https://img.shields.io/badge/Adapter_Size-~10_MB-3b82f6?style=for-the-badge&logo=database&logoColor=white" />
+  <img src="https://img.shields.io/badge/vs_Full_Fine--Tune-~5_GB-ec4899?style=for-the-badge&logo=database&logoColor=white" />
+  <img src="https://img.shields.io/badge/Mock_Mode-Zero_GPU-10b981?style=for-the-badge&logo=cloud&logoColor=white" />
+</div>
 
-## Solution
+<br/>
 
-LoRA fine-tuning delivers 90% of the benefit at 1% of the cost:
+<div align="center">
+  <i>🧠 AI Research Project · Author: <b>Sumit Raj</b> · M.Tech VNIT Nagpur · Ex-Salesforce</i>
+</div>
 
-- **Frozen base model** — no catastrophic forgetting
-- **Trainable low-rank adapters** — millions of params instead of billions
-- **Tiny artifacts** — adapters are a few MB, easy to swap and version
-- **Fast training** — hours instead of days on a single GPU
+<br/>
 
-## Architecture
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%" />
 
+---
+
+## 🎯 Overview
+
+<img align="right" width="340" src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" alt="Neural animation"/>
+
+Instead of retraining an entire LLM (expensive + slow), this project uses **LoRA** to inject small trainable **low-rank matrices** into the base model's attention layers.
+
+> **🎯 Core Idea:** The base model stays **frozen**, and only **~1% of parameters** are trained — but the model learns **domain-specific behaviors**.
+
+<br clear="right"/>
+
+### 🔄 The Pipeline
+
+<table>
+<tr>
+<td width="25%" valign="top" align="center">
+
+### 1️⃣ Generate
+
+<img src="https://img.shields.io/badge/📊-Dataset-8b5cf6?style=for-the-badge" />
+
+Instruction-tuning dataset
+
+</td>
+<td width="25%" valign="top" align="center">
+
+### 2️⃣ Wrap
+
+<img src="https://img.shields.io/badge/🧠-LoRA-3b82f6?style=for-the-badge" />
+
+PEFT adapters on base model
+
+</td>
+<td width="25%" valign="top" align="center">
+
+### 3️⃣ Train
+
+<img src="https://img.shields.io/badge/🎯-Fine-Tune-10b981?style=for-the-badge" />
+
+HuggingFace Trainer loop
+
+</td>
+<td width="25%" valign="top" align="center">
+
+### 4️⃣ Serve
+
+<img src="https://img.shields.io/badge/🌐-FastAPI-ec4899?style=for-the-badge" />
+
+Inference endpoint
+
+</td>
+</tr>
+</table>
+
+> **🛡️ Graceful Fallback:** If `torch`, `transformers`, `peft`, or `datasets` are unavailable, the project falls back to a **mock trainer** — tests always pass, even in CI without GPU.
+
+---
+
+## ❌ Problem Statement
+
+General-purpose LLMs **fail** on domain-specific tasks:
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### ❌ LLM Failures
+
+- 🎭 **Wrong terminology** — mixes up domain jargon
+- 📝 **Verbose answers** — not concise, on-point
+- 🎭 **Hallucinated facts** — invents plausible details
+- 📐 **No format control** — doesn't follow structure
+
+</td>
+<td width="50%" valign="top">
+
+### 💸 Full Fine-Tuning Costs
+
+- 💰 **Expensive** — multiple GPUs for days
+- 💾 **Storage** — each model = 10+ GB
+- ⚠️ **Catastrophic forgetting** — loses general knowledge
+- 🐌 **Slow** — days per iteration
+
+</td>
+</tr>
+</table>
+
+---
+
+## ✅ Solution — LoRA
+
+**LoRA fine-tuning delivers 90% of the benefit at 1% of the cost:**
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🎯 Key Benefits
+
+- 🧊 **Frozen base model** — no catastrophic forgetting
+- 🎯 **Trainable low-rank adapters** — millions of params, not billions
+- 💾 **Tiny artifacts** — adapters are a few MB, easy to version
+- ⚡ **Fast training** — hours instead of days on a single GPU
+
+</td>
+<td width="50%" valign="top">
+
+### 📊 Comparison
+
+| Metric | Full FT | LoRA |
+|--------|:-------:|:----:|
+| **Params trained** | 100% | **~1%** |
+| **Storage** | ~5 GB | **~10 MB** |
+| **Time** | Days | **Hours** |
+| **GPU cost** | $$$$ | **$** |
+| **Forgetting** | High | **None** |
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ Architecture
+
+### 🧠 LoRA Training Pipeline
+
+```mermaid
+flowchart TD
+    A[📊 Dataset] --> B[🔤 Tokenize]
+    B --> C[🧠 Base LLM frozen]
+    C --> D[🎯 LoRA Adapters]
+    D --> E[🏋️ Training Loop]
+    E --> F[💾 Save Adapters]
+    F --> G[📈 Evaluate]
+    G --> H[🌐 FastAPI]
+    H --> I[🐳 Docker + CI]
+    
+    style A fill:#8b5cf6,stroke:#fff,color:#fff
+    style D fill:#ec4899,stroke:#fff,color:#fff
+    style F fill:#10b981,stroke:#fff,color:#fff
+    style I fill:#3b82f6,stroke:#fff,color:#fff
+```
+
+### 📐 ASCII Fallback
+
+```
 Synthetic Q&A Dataset (data/qa_dataset.json)
          |
          v
@@ -72,117 +250,196 @@ FastAPI Endpoints: /train  /evaluate  /infer
          |
          v
 Docker + GitHub Actions CI
+```
 
-## Tech Stack
+---
 
-| Category | Technologies |
-|----------|-------------|
-| Base Model | TinyLlama 1.1B (or any HF causal LM) |
-| Fine-Tuning | LoRA via PEFT |
-| Training | HuggingFace Transformers + Trainer |
-| Datasets | HuggingFace Datasets |
-| API | FastAPI, Uvicorn, Pydantic |
-| Testing | pytest, httpx |
-| Containerization | Docker |
-| CI/CD | GitHub Actions |
-| Language | Python 3.11+ |
+## 🛠️ Tech Stack
 
-## Project Structure
+<table align="center">
+<tr>
+<td><b>Category</b></td>
+<td><b>Technologies</b></td>
+</tr>
+<tr>
+<td>🧠 Base Model</td>
+<td><img src="https://img.shields.io/badge/TinyLlama_1.1B-FFD21E?style=flat-square&logo=huggingface&logoColor=black" /></td>
+</tr>
+<tr>
+<td>🎯 Fine-Tuning</td>
+<td><img src="https://img.shields.io/badge/LoRA_via_PEFT-1C3C3C?style=flat-square" /></td>
+</tr>
+<tr>
+<td>🏋️ Training</td>
+<td><img src="https://img.shields.io/badge/HuggingFace_Transformers-FFD21E?style=flat-square&logo=huggingface&logoColor=black" /> <img src="https://img.shields.io/badge/Trainer-EE4C2C?style=flat-square" /></td>
+</tr>
+<tr>
+<td>📊 Datasets</td>
+<td><img src="https://img.shields.io/badge/HF_Datasets-FFD21E?style=flat-square&logo=huggingface&logoColor=black" /></td>
+</tr>
+<tr>
+<td>🌐 API</td>
+<td><img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" /> <img src="https://img.shields.io/badge/Uvicorn-2C2C2C?style=flat-square" /> <img src="https://img.shields.io/badge/Pydantic-E92063?style=flat-square&logo=pydantic&logoColor=white" /></td>
+</tr>
+<tr>
+<td>🧪 Testing</td>
+<td><img src="https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white" /> <img src="https://img.shields.io/badge/httpx-3b82f6?style=flat-square" /></td>
+</tr>
+<tr>
+<td>🐳 Container</td>
+<td><img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" /></td>
+</tr>
+<tr>
+<td>⚙️ CI/CD</td>
+<td><img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white" /></td>
+</tr>
+<tr>
+<td>🐍 Language</td>
+<td><img src="https://img.shields.io/badge/Python_3.11+-3776AB?style=flat-square&logo=python&logoColor=white" /></td>
+</tr>
+</table>
 
+---
+
+## 📦 Project Structure
+
+```
 llm-lora-finetuning/
-├── src/
+│
+├── 🐍 src/
 │   ├── __init__.py
-│   ├── data_generator.py       # Generate synthetic Q&A dataset
-│   ├── lora_trainer.py         # LoRA fine-tuning (real or mock)
-│   └── evaluate_model.py       # Base vs fine-tuned comparison
-├── api/
+│   ├── 📊 data_generator.py       # Generate synthetic Q&A dataset
+│   ├── 🎯 lora_trainer.py         # LoRA fine-tuning (real or mock)
+│   └── 📈 evaluate_model.py       # Base vs fine-tuned comparison
+│
+├── 🌐 api/
 │   ├── __init__.py
-│   └── main.py                 # FastAPI service
-├── tests/
+│   └── main.py                     # FastAPI service
+│
+├── 🧪 tests/
 │   ├── __init__.py
-│   └── test_api.py             # pytest tests
-├── data/                        # Generated dataset (git-ignored)
-├── adapters/                    # LoRA adapter weights (git-ignored)
-├── .github/workflows/ci.yml
-├── Dockerfile
-├── requirements.txt
-├── requirements-optional.txt
-├── .env.example
-├── .gitignore
-├── LICENSE
-└── README.md
+│   └── test_api.py                 # pytest tests
+│
+├── 📊 data/                        # Generated dataset (git-ignored)
+├── 🎯 adapters/                    # LoRA adapter weights (git-ignored)
+├── ⚙️ .github/workflows/ci.yml
+├── 🐳 Dockerfile
+├── 📋 requirements.txt
+├── 📋 requirements-optional.txt
+├── 🔐 .env.example
+├── 🚫 .gitignore
+├── 📜 LICENSE
+└── 📖 README.md
+```
 
-## Quick Start
+---
 
-### 1. Clone
+## 🚀 Quick Start
 
+<div align="center">
+  <img src="https://img.shields.io/badge/⏱️_5_min_setup-3776AB?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/🐍_Python_3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/🛡️_No_GPU_Required-10b981?style=for-the-badge" />
+</div>
+
+<br/>
+
+### 1️⃣ Clone
+
+```bash
 git clone https://github.com/sumit966/llm-lora-finetuning.git
 cd llm-lora-finetuning
+```
 
-### 2. Virtual environment
+### 2️⃣ Virtual Environment
 
-Windows:
+**Windows:**
+
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
-macOS / Linux:
+**macOS / Linux:**
+
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-### 3. Install base dependencies
+### 3️⃣ Install Base Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-### 4. (Optional) Install real LoRA training stack
+### 4️⃣ (Optional) Install Real LoRA Training Stack
 
+```bash
 pip install -r requirements-optional.txt
+```
 
-If this fails on Python 3.14 (torch/transformers wheels missing), skip it. The project automatically uses a mock trainer and still works fully.
+> 💡 If this fails on Python 3.14 (torch/transformers wheels missing), skip it. The project **automatically uses a mock trainer**.
 
-### 5. (Optional) Configure environment
+### 5️⃣ (Optional) Configure Environment
 
-Copy .env.example to .env and edit:
+```bash
+cp .env.example .env
+# Set HF_TOKEN, BASE_MODEL, MAX_LENGTH
+```
 
-HF_TOKEN=your-hf-token-if-needed
-BASE_MODEL=tinyllama/tinyllama-1.1B-Chat-v1.0
-MAX_LENGTH=256
+### 6️⃣ Start the API
 
-### 6. Start the API
-
+```bash
 uvicorn api.main:app --reload
+```
 
-API runs at http://localhost:8000
+**API runs at** http://localhost:8000
 
-### 7. Open Swagger UI
+### 7️⃣ Open Swagger UI
 
+```bash
 http://localhost:8000/docs
+```
 
-## API Usage
+---
 
-### POST /generate-dataset
+## 🔌 API Usage
+
+### 🔵 POST `/generate-dataset`
 
 Generate the synthetic Q&A dataset.
 
+```bash
 curl -X POST "http://localhost:8000/generate-dataset?n_samples=200"
+```
 
-Response:
+**Response:**
+
+```json
 {
   "message": "Generated 200 Q&A samples",
   "metrics": {"n_samples": 200}
 }
+```
 
-### POST /train
+### 🔵 POST `/train`
 
 Fine-tune with LoRA.
 
-Request:
+**Request:**
+
+```json
 {
   "n_samples": 200,
   "epochs": 3,
   "lora_r": 8
 }
+```
 
-Response:
+**Response:**
+
+```json
 {
   "message": "Training complete",
   "metrics": {
@@ -197,136 +454,304 @@ Response:
     "mode": "mock"
   }
 }
+```
 
-### POST /evaluate
+### 🔵 POST `/evaluate`
 
 Compare base vs fine-tuned on a fixed eval set.
 
-Response:
+**Response:**
+
+```json
 {
   "base_accuracy": 0.52,
   "finetuned_accuracy": 0.78,
   "improvement_pct": 50.0
 }
+```
 
-### POST /infer
+### 🔵 POST `/infer`
 
 Generate a response using the fine-tuned model (or mock).
 
-Request:
+**Request:**
+
+```json
 {
   "instruction": "What is LoRA?",
   "max_new_tokens": 100
 }
+```
 
-Response:
+**Response:**
+
+```json
 {
   "instruction": "What is LoRA?",
   "response": "...",
   "mode": "mock"
 }
+```
 
-### Other Endpoints
+### 📋 Other Endpoints
 
 | Endpoint | Method | Purpose |
-|----------|--------|---------|
-| / | GET | API info |
-| /health | GET | Health check |
-| /docs | GET | Swagger UI |
-| /redoc | GET | Alternative docs |
+|----------|:------:|---------|
+| 🔵 `/` | 🟢 GET | API info |
+| 💚 `/health` | 🟢 GET | Health check |
+| 📘 `/docs` | 🟢 GET | Swagger UI |
+| 📗 `/redoc` | 🟢 GET | Alternative docs |
 
-## LoRA Configuration
+---
 
-| Parameter | Value | Meaning |
-|-----------|-------|---------|
-| r (rank) | 8 | Dimension of low-rank matrices |
-| alpha | 16 | Scaling factor (typically 2x rank) |
-| dropout | 0.05 | Dropout on adapter output |
-| target_modules | q_proj, v_proj | Which attention layers get adapters |
+## 🎯 LoRA Configuration
 
-Why these values:
+<table align="center">
+<tr>
+<td><b>Parameter</b></td>
+<td><b>Value</b></td>
+<td><b>Meaning</b></td>
+</tr>
+<tr>
+<td>🎯 <code>r</code> (rank)</td>
+<td><b>8</b></td>
+<td>Dimension of low-rank matrices</td>
+</tr>
+<tr>
+<td>⚖️ <code>alpha</code></td>
+<td><b>16</b></td>
+<td>Scaling factor (typically 2× rank)</td>
+</tr>
+<tr>
+<td>💧 <code>dropout</code></td>
+<td><b>0.05</b></td>
+<td>Dropout on adapter output</td>
+</tr>
+<tr>
+<td>🎯 <code>target_modules</code></td>
+<td><b>q_proj, v_proj</b></td>
+<td>Which attention layers get adapters</td>
+</tr>
+</table>
 
-- r=8 is a common starting point — enough capacity for domain tuning without overfitting
-- alpha=16 (2×r) is standard practice
-- Adapting only q_proj and v_proj covers the attention mechanism cheaply
+### 💡 Why These Values?
 
-## Offline / Mock Mode
+- 🎯 **r=8** is a common starting point — enough capacity for domain tuning without overfitting
+- ⚖️ **alpha=16 (2×r)** is standard practice
+- 🎯 **q_proj + v_proj** covers the attention mechanism cheaply
 
-If torch, transformers, peft, or datasets are not installed:
+---
 
-- The training step prints realistic metrics and saves a metadata JSON
-- The inference endpoint returns a template response
-- Tests still pass because the API interface is unchanged
+## 🛡️ Offline / Mock Mode
 
-This makes the repo:
+If `torch`, `transformers`, `peft`, or `datasets` are not installed:
 
-- Runnable in GitHub Actions without a GPU
-- Testable on any machine
-- Easy to swap in the real training stack later
+<table>
+<tr>
+<td width="50%" valign="top">
 
-## Testing
+### 🎭 What Happens
 
+- 🏋️ Training step prints **realistic metrics** and saves metadata JSON
+- 🌐 Inference endpoint returns a **template response**
+- ✅ Tests still pass (API interface unchanged)
+
+</td>
+<td width="50%" valign="top">
+
+### ✅ Why This Matters
+
+- 🚀 Runnable in **GitHub Actions without GPU**
+- 🧪 **Testable** on any machine
+- 🔄 Easy to **swap in real training stack** later
+- 🛡️ **Graceful degradation** keeps CI green
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🧪 Testing
+
+```bash
 pytest tests/ -v
+```
 
-Tests cover:
-- Root endpoint responds
-- Health check returns expected status
-- /generate-dataset creates N samples
-- /train returns metrics
-- /evaluate returns base vs fine-tuned accuracies
-- /infer returns a response
-- Invalid instruction returns 422
+**Tests cover:**
 
-## Docker
+- 🟢 Root endpoint responds
+- 💚 Health check returns expected status
+- 📊 `/generate-dataset` creates N samples
+- 🎯 `/train` returns metrics
+- 📈 `/evaluate` returns base vs fine-tuned accuracies
+- 🌐 `/infer` returns a response
+- ❌ Invalid instruction returns **422**
 
-Build:
+---
+
+## 🐳 Docker
+
+### 🔨 Build
+
+```bash
 docker build -t llm-lora-finetuning .
+```
 
-Run:
+### ▶️ Run
+
+```bash
 docker run -p 8000:8000 llm-lora-finetuning
+```
 
-## CI/CD Pipeline
+---
 
-Every push to main triggers GitHub Actions:
+## ⚙️ CI/CD Pipeline
 
-1. Install Python 3.11 + base dependencies
-2. Run pytest test suite (runs in mock mode, no GPU required)
+Every push to `main` triggers GitHub Actions:
 
-See .github/workflows/ci.yml.
+```
+╔══════════════════════════════════════════════════╗
+║              GITHUB ACTIONS WORKFLOW             ║
+╠══════════════════════════════════════════════════╣
+║                                                  ║
+║  [1/2] 📥 Install Python 3.11 + deps            ║
+║       │                                          ║
+║       ▼                                          ║
+║  [2/2] 🧪 Run pytest (mock mode, no GPU)        ║
+║       │                                          ║
+║       ▼                                          ║
+║  ✅ PASSED                                       ║
+║                                                  ║
+╚══════════════════════════════════════════════════╝
+```
 
-## Key Learnings
+> 📄 See `.github/workflows/ci.yml`
 
-- LoRA trains ~1% of parameters while matching full fine-tuning quality on narrow domains
-- Adapter weights are ~10 MB vs ~5 GB for a full fine-tune — massive storage savings
-- Freezing the base model prevents catastrophic forgetting
-- Target module choice (q_proj, v_proj) covers attention cheaply
-- Rank and alpha are the two main hyperparameters to tune
-- Graceful fallback to mock mode keeps CI green without GPUs
-- FastAPI + Pydantic gives free validation and Swagger docs
+---
 
-## Future Improvements
+## 🎓 Key Learnings
 
-- Add QLoRA (4-bit quantization) for training on consumer GPUs
-- Multi-adapter serving (swap LoRA per request)
-- Evaluation with BLEU, ROUGE, and semantic similarity
-- Real domain dataset (medical, legal, or finance)
-- Deploy adapter to HuggingFace Hub
-- Add streaming inference via Server-Sent Events
-- Track experiments with Weights & Biases
-- Serve via vLLM for high-throughput inference
+<table>
+<tr>
+<td width="50%" valign="top">
 
-## License
+### 🧠 AI Insights
 
-MIT License - see LICENSE file.
+- 🎯 **LoRA trains ~1% params** while matching full fine-tuning quality
+- 💾 **Adapters ~10 MB** vs ~5 GB full fine-tune
+- 🧊 **Frozen base** prevents catastrophic forgetting
+- 🎯 **Target module choice** (q_proj, v_proj) covers attention cheaply
+- ⚖️ **Rank and alpha** are the two main hyperparameters
 
-## Author
+</td>
+<td width="50%" valign="top">
 
-Sumit Raj
-- M.Tech Applied AI & ML @ VNIT Nagpur
-- Ex-Software Engineer Intern @ Salesforce
-- GitHub: https://github.com/sumit966
-- LinkedIn: https://www.linkedin.com/in/er-sumit-raj-/
-- Portfolio: https://sumit966-github-io.vercel.app
-- Email: info.sr0909@gmail.com
+### 🛠️ Engineering Insights
 
-If you found this project useful, please consider giving it a star!
+- 🛡️ **Graceful fallback** to mock mode keeps CI green
+- 🌐 **FastAPI + Pydantic** gives free validation
+- 📄 **Auto-generated Swagger docs**
+- 🐳 **Docker reproducibility** for ML workflows
+- 🧪 **Offline testing** without GPU
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Future Improvements
+
+| 🌟 | Feature |
+|:--:|---------|
+| 🔥 | **QLoRA** (4-bit quantization) for consumer GPUs |
+| 🔄 | **Multi-adapter serving** (swap LoRA per request) |
+| 📊 | **BLEU, ROUGE, semantic** similarity evaluation |
+| 🏥 | **Real domain dataset** (medical, legal, finance) |
+| 🤗 | **Deploy adapter** to HuggingFace Hub |
+| ⚡ | **Streaming inference** via SSE |
+| 📈 | **Weights & Biases** experiment tracking |
+| 🚀 | **vLLM** for high-throughput inference |
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/claude-mascot.svg" width="100" alt="Claude Mascot" />
+
+<br/><br/>
+
+<img src="https://img.shields.io/badge/Sumit_Raj-AI_Engineer-8b5cf6?style=for-the-badge&labelColor=0d1117" />
+
+<br/><br/>
+
+<b>M.Tech Applied AI & ML @ VNIT Nagpur</b><br/>
+<i>Ex-Software Engineer Intern @ Salesforce</i>
+
+<br/><br/>
+
+<a href="https://sumit966.github.io">
+  <img src="https://img.shields.io/badge/Portfolio-Visit-3b82f6?style=for-the-badge&logo=googlechrome&logoColor=white" />
+</a>
+<a href="https://www.linkedin.com/in/er-sumit-raj-/">
+  <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+<a href="https://github.com/sumit966">
+  <img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white" />
+</a>
+<a href="mailto:info.sr0909@gmail.com">
+  <img src="https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+</a>
+
+<br/><br/>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=500&size=18&duration=3000&pause=1000&color=F59E0B&center=true&vCenter=true&width=600&height=60&lines=%E2%AD%90+If+you+found+this+project+useful;%E2%AD%90+Please+consider+giving+it+a+star!" alt="Star CTA" />
+
+</div>
+
+---
+
+## 📄 License
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,24,30&height=2&width=60%" />
+
+<br/>
+
+<img src="https://img.shields.io/badge/⚖️_LICENSE-MIT-f59e0b?style=for-the-badge&labelColor=0d1117&logo=opensourceinitiative&logoColor=white" />
+
+<br/><br/>
+
+<samp>
+Released under the <b>MIT License</b> — see <a href="LICENSE">LICENSE</a> file.
+</samp>
+
+<br/><br/>
+
+<sub><samp>© 2025 &nbsp;·&nbsp; SUMIT RAJ &nbsp;·&nbsp; ALL RIGHTS RESERVED</samp></sub>
+
+<br/>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&customColorList=12,20,24,30&height=2&width=60%" />
+
+</div>
+
+<br/>
+
+<!-- ═══════ WORKING AI SCENES FOOTER ═══════ -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/scenes/claude-code-coffee-compile.svg" width="160" alt="Coffee Compile" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/scenes/claude-bug-hunting.svg" width="160" alt="Bug Hunting" />
+  <img src="https://raw.githubusercontent.com/imMamdouhaboammar/vibe-svgs/main/svgs/mascots/gemini-jumping.svg" width="160" alt="Gemini Jumping" />
+</div>
+
+<br/>
+
+<!-- ═══════ 16D ANIMATED FOOTER ═══════ -->
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,25:8b5cf6,50:3b82f6,75:ec4899,100:0d1117&height=140&section=footer&text=🧠%20LoRA%20Fine-Tuning%20·%20Train%201%25%20·%20Gain%20100%25&fontSize=20&fontColor=ffffff&animation=twinkling" width="100%" />
+</div>
